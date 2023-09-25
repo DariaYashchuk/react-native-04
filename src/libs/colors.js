@@ -17,5 +17,8 @@ export const COLORS = {
   whiteBtnText: '#fff',
 
   errorColor: 'red',
-  errorBg: '#fff'
+  errorBg: '#fff',
+
+  navTabActiveIcon: '#fff',
+  navTabInactiveIcon: '#212121CC'
 }

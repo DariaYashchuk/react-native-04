@@ -14,10 +14,14 @@ import { COLORS } from '../libs/colors'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { useNavigation } from '@react-navigation/native'
 
 export const LoginScreen = () => {
   const [isEmailFocused, setIsEmailFocused] = useState(false)
   const [isPasswordFocused, setIsPasswordFocused] = useState(false)
+  const [isPasswordShown, setIsPasswordShown] = useState(true)
+
+  const navigation = useNavigation()
 
   const emailRules = /\S+@\S+\.\S+/
   // example: email@domain.com
@@ -46,18 +50,22 @@ export const LoginScreen = () => {
 
   const onSubmit = (data) => {
     console.log(data)
+    navigation.navigate('Home', {
+      // screen: 'PostsScreen',
+      params: {
+        email: data.email
+      }
+    })
+
     reset()
   }
 
   const onPressShowPassword = () => {
-    return
+    setIsPasswordShown(!isPasswordShown)
   }
 
   const onPressRegisterRedirect = () => {
-    return
-  }
-  const onPressLogInBtn = () => {
-    return
+    navigation.navigate('Registration')
   }
 
   return (
@@ -112,7 +120,7 @@ export const LoginScreen = () => {
                     placeholderTextColor={COLORS.placeholderColor}
                     name="password"
                     textContentType="password"
-                    secureTextEntry={true}
+                    secureTextEntry={isPasswordShown}
                     onFocus={() => setIsPasswordFocused(true)}
                     onBlur={() => setIsPasswordFocused(false)}
                     onChangeText={onChange}
@@ -243,12 +251,12 @@ const styles = StyleSheet.create({
   },
   loginLink: {
     marginRight: 'auto',
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    marginBottom: 132
   },
   loginLinkText: {
     color: COLORS.link,
     fontFamily: 'Roboto-Regular',
-    fontSize: 16,
-    marginBottom: 132
+    fontSize: 16
   }
 })

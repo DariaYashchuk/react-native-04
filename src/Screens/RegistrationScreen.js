@@ -16,6 +16,7 @@ import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { useNavigation } from '@react-navigation/native'
 
 export const RegistrationScreen = () => {
   const [isLogInFocused, setIsLogInFocused] = useState(false)
@@ -24,9 +25,7 @@ export const RegistrationScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false)
   const [isPasswordShown, setIsPasswordShown] = useState(true)
 
-  const [login, setLogin] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigation = useNavigation()
 
   const emailRules = /\S+@\S+\.\S+/
   // example: email@domain.com
@@ -56,6 +55,14 @@ export const RegistrationScreen = () => {
 
   const onSubmit = (data) => {
     console.log(data)
+
+    navigation.navigate('Home', {
+      // screen: 'PostsScreen',
+
+      email: data.email,
+      login: data.login
+    })
+
     reset()
   }
 
@@ -68,7 +75,7 @@ export const RegistrationScreen = () => {
   }
 
   const onPressLoginRedirect = () => {
-    return
+    navigation.navigate('Login')
   }
 
   return (
@@ -207,9 +214,7 @@ export const RegistrationScreen = () => {
             style={styles.loginLink}
             onPress={onPressLoginRedirect}
           >
-            <Text style={styles.loginLinkText}>
-              Немає акаунту? Зареєструватися
-            </Text>
+            <Text style={styles.loginLinkText}>Вже є акаунт? Увійти</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

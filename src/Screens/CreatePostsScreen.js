@@ -1,12 +1,9 @@
-// import { useRoute } from '@react-navigation/native'
 import { View, Text, StyleSheet } from 'react-native'
 
-export const PostsScreen = () => {
-  // const { params } = useRoute()
-
+export const CreatePostsScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>PostsScreen</Text>
+      <Text>CreatePostsScreen</Text>
     </View>
   )
 }
